@@ -87,10 +87,13 @@
         android:layout_below="@+id/switchSms"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="80dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true" />
+        android:layout_marginTop="97dp"
+        android:layout_alignRight="@+id/etMsgAlarme"
+        android:layout_alignEnd="@+id/etMsgAlarme"
+        android:layout_alignParentBottom="true"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="br.com.jry.routinereminder.activity.AlarmeActivity"/>
 
 
 </RelativeLayout>
