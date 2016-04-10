@@ -23,14 +23,23 @@ import com.google.android.gms.maps.SupportMapFragment;
 public class AlarmeActivity extends  AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap map;
-
+    private Integer id = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_alarme);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        Alarme alarme = (Alarme) getIntent().getSerializableExtra("alarme");
+        if(alarme!= null){
+            this.id = alarme.getId();
+            EditText titulo = (EditText) findViewById(R.id.etTituloAlarme);
+            EditText msg = (EditText) findViewById(R.id.etMsgAlarme);
+
+            titulo.setText(alarme.getDescricao());
+            msg.setText(alarme.getMensagem());
+
+        }
     }
 
     @Override
@@ -47,14 +56,17 @@ public class AlarmeActivity extends  AppCompatActivity implements OnMapReadyCall
                 EditText msg = (EditText) findViewById(R.id.etMsgAlarme);
 
                 if(msg.getText().toString().trim().equals("") || titulo.getText().toString().trim().equals("")){
-                    Toast toast = Toast.makeText(getApplicationContext(), "Favor preecher Todos os campos", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Favor preecher Todos os campos!", Toast.LENGTH_LONG);
                     toast.show();
                 }else{
                     AlarmeDao alarmeDao = new AlarmeDao(getApplicationContext());
                     Alarme alarme = new Alarme();
+                    alarme.setId(this.id);
                     alarme.setDescricao(titulo.getText().toString());
                     alarme.setMensagem(msg.getText().toString());
-                    alarmeDao.insert(alarme);
+                    alarmeDao.insertOrUpdate(alarme);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Salvo com sucesso!", Toast.LENGTH_LONG);
+                    toast.show();
                     this.onBackPressed();
                 }
 

@@ -70,10 +70,14 @@ public class AlarmeDao extends SQLiteOpenHelper{
         return alarmes;
     }
 
-    public long insert(Alarme alarme){
+    public long insertOrUpdate(Alarme alarme){
         ContentValues contentValues = new ContentValues();
         contentValues.put("descricao", alarme.getDescricao());
         contentValues.put("mensagem", alarme.getMensagem());
+
+        if(alarme.getId() != null){
+            return getWritableDatabase().update(TABELA, contentValues, "id = ?", new String[]{String.valueOf(alarme.getId())});
+        }
         return  getWritableDatabase().insert(TABELA, null, contentValues);
     }
 
