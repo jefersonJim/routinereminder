@@ -4,13 +4,17 @@ import br.com.jry.routinereminder.dao.AlarmeDao;
 import br.com.jry.routinereminder.entity.Alarme;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +23,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+
+import java.util.jar.Manifest;
 
 public class AlarmeActivity extends  AppCompatActivity implements OnMapReadyCallback {
 
@@ -30,6 +36,7 @@ public class AlarmeActivity extends  AppCompatActivity implements OnMapReadyCall
         setContentView(R.layout.activity_alarme);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
         Alarme alarme = (Alarme) getIntent().getSerializableExtra("alarme");
         if(alarme!= null){
             this.id = alarme.getId();
@@ -79,6 +86,11 @@ public class AlarmeActivity extends  AppCompatActivity implements OnMapReadyCall
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.map = googleMap;
-
+        this.map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            this.map.setMyLocationEnabled(true);
+        } else {
+            // Show rationale and request permission.
+        }
     }
 }
