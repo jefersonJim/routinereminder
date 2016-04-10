@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -38,16 +39,17 @@ public class MainActivity extends AppCompatActivity {
         AlarmeDao alarmeDao = new AlarmeDao(getApplicationContext());
         this.alarmes = alarmeDao.getListAlarmes();
 
-        if(this.alarmes.size() > 0){
-            setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
+        ListView listView = (ListView) findViewById(R.id.listAlarmeView);
 
-            ListView listView = (ListView) findViewById(R.id.listAlarmeView);
-            this.adapter = new AlarmeAdapter(this.alarmes, getApplicationContext());
-            listView.setAdapter(adapter);
-            registerForContextMenu(listView);
-        }else{
-            setContentView(R.layout.empty_layout);
-        }
+        this.adapter = new AlarmeAdapter(this.alarmes, getApplicationContext());
+        TextView empty = (TextView) findViewById(R.id.tvEmpty);
+
+        listView.setEmptyView(empty);
+        listView.setAdapter(adapter);
+
+        registerForContextMenu(listView);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
