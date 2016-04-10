@@ -81,25 +81,16 @@
 
     <fragment
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:name="com.google.android.gms.maps.MapFragment"
-        android:id="@+id/mapFragment"
-        android:layout_marginTop="75dp"
-        android:layout_below="@+id/switchSms"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/etMsgAlarme"
-        android:layout_alignEnd="@+id/etMsgAlarme" />
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Selecione um local"
-        android:id="@+id/textView2"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:id="@+id/map"
         android:layout_below="@+id/switchSms"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="51dp" />
+        android:layout_marginTop="80dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true" />
+
 
 </RelativeLayout>
