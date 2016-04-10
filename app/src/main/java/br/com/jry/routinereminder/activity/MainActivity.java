@@ -11,7 +11,10 @@ import android.view.ContextMenu;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,7 +24,8 @@ import br.com.jry.routinereminder.dao.AlarmeDao;
 import br.com.jry.routinereminder.entity.Alarme;
 
 public class MainActivity extends AppCompatActivity {
-
+    private AlarmeAdapter adapter;
+    private List<Alarme> alarmes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,13 +36,13 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         AlarmeDao alarmeDao = new AlarmeDao(getApplicationContext());
-        List<Alarme> alarmes = alarmeDao.getListAlarmes();
+        this.alarmes = alarmeDao.getListAlarmes();
 
-        if(alarmes.size() > 0){
+        if(this.alarmes.size() > 0){
             setContentView(R.layout.activity_main);
 
             ListView listView = (ListView) findViewById(R.id.listAlarmeView);
-            AlarmeAdapter adapter = new AlarmeAdapter(alarmes, getApplicationContext());
+            this.adapter = new AlarmeAdapter(this.alarmes, getApplicationContext());
             listView.setAdapter(adapter);
             registerForContextMenu(listView);
         }else{
@@ -67,8 +71,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo acmi = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        ListView lv = (ListView) findViewById(R.id.listAlarmeView);
+        Alarme alarme = (Alarme) lv.getItemAtPosition(acmi.position);
+        AlarmeDao dao = new AlarmeDao(getApplicationContext());
+        switch (item.getItemId()){
+            case R.id.action_delete :
+                dao.delete(alarme.getId());
+                Toast toast = Toast.makeText(getApplicationContext(), "Alarme deletado com successo!", Toast.LENGTH_LONG);
+                toast.show();
+                this.alarmes.remove(alarme);
+                this.adapter.notifyDataSetChanged();
+                return  true;
+            default:
+                return super.onContextItemSelected(item);
 
-        return super.onContextItemSelected(item);
+        }
+
     }
 
     @Override

@@ -63,7 +63,7 @@ public class AlarmeDao extends SQLiteOpenHelper{
                 alarmes.add(alarme);
             }
         } catch (Exception sqle) {
-            Log.e("Erro ao Listar os Alarmes", sqle.getMessage());
+            Log.e("Erro", sqle.getMessage());
         } finally {
             cursor.close();
         }
@@ -75,6 +75,10 @@ public class AlarmeDao extends SQLiteOpenHelper{
         contentValues.put("descricao", alarme.getDescricao());
         contentValues.put("mensagem", alarme.getMensagem());
         return  getWritableDatabase().insert(TABELA, null, contentValues);
+    }
+
+    public int delete(int id){
+        return getReadableDatabase().delete(TABELA, "id = ?", new String[]{String.valueOf(id)});
     }
 
 }
