@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Routine Reminder</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configurações</string>
     <string name="action_saveAlarm">Savar</string>
+    <string name="action_delete">Deletar</string>
+    <string name="action_desativar">Desativar</string>
 </resources>

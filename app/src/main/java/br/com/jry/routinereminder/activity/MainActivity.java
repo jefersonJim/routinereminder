@@ -1,11 +1,13 @@
 package br.com.jry.routinereminder.activity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +25,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         AlarmeDao alarmeDao = new AlarmeDao(getApplicationContext());
         List<Alarme> alarmes = alarmeDao.getListAlarmes();
@@ -48,8 +55,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+      super.onCreateContextMenu(menu,v,menuInfo);
+        menu.setHeaderTitle("Opções");
+        menu.setHeaderIcon(R.drawable.mr_ic_settings_light);
+        getMenuInflater().inflate(R.menu.menu_lvalarme, menu);
+    }
 
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        return super.onContextItemSelected(item);
     }
 
     @Override

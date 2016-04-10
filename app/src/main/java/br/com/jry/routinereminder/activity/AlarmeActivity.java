@@ -22,6 +22,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 
 public class AlarmeActivity extends  AppCompatActivity implements OnMapReadyCallback {
 
+    private GoogleMap map;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +46,7 @@ public class AlarmeActivity extends  AppCompatActivity implements OnMapReadyCall
                 EditText titulo = (EditText) findViewById(R.id.etTituloAlarme);
                 EditText msg = (EditText) findViewById(R.id.etMsgAlarme);
 
-                if(msg.getText().toString().trim().equals("") && titulo.getText().toString().trim().equals("")){
+                if(msg.getText().toString().trim().equals("") || titulo.getText().toString().trim().equals("")){
                     Toast toast = Toast.makeText(getApplicationContext(), "Favor preecher Todos os campos", Toast.LENGTH_LONG);
                     toast.show();
                 }else{
@@ -53,9 +55,7 @@ public class AlarmeActivity extends  AppCompatActivity implements OnMapReadyCall
                     alarme.setDescricao(titulo.getText().toString());
                     alarme.setMensagem(msg.getText().toString());
                     alarmeDao.insert(alarme);
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                    this.finish();
+                    this.onBackPressed();
                 }
 
                 return true;
@@ -66,6 +66,7 @@ public class AlarmeActivity extends  AppCompatActivity implements OnMapReadyCall
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        this.map = googleMap;
 
     }
 }

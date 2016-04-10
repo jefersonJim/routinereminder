@@ -9,5 +9,5 @@
         android:orderInCategory="100"
         android:icon="@android:drawable/ic_menu_save"
         android:title="@string/action_saveAlarm"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom|never|withText" />
 </menu>
