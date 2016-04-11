@@ -5,6 +5,6 @@
     <string name="action_edit">Editar</string>
     <string name="action_delete">Deletar</string>
     <string name="action_desativar">Desativar</string>
-    <string name="list_vazia">Você não possui nenhum alarme cadastrado</string>
+    <string name="list_vazia">Nenhum registro encontrado</string>
     <string name="action_sobre">Sobre</string>
 </resources>
