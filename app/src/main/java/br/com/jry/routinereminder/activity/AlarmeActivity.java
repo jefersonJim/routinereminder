@@ -93,4 +93,6 @@ public class AlarmeActivity extends  AppCompatActivity implements OnMapReadyCall
             // Show rationale and request permission.
         }
     }
+
+
 }

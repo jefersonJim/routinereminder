@@ -28,7 +28,7 @@
         android:id="@+id/tvEmpty"
         android:textAlignment="center"
         android:textSize="23dp"
-        android:textColor="#08a9fa"
+        android:textColor="#64FFDA"
         android:layout_marginTop="173dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
