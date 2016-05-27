@@ -12,6 +12,10 @@ public class Alarme implements Serializable{
     private String mensagem;
     private Integer ativo;
     private String dias;
+    private Double latitude;
+    private Double longitude;
+    private Integer distancia;
+    private String endereco;
 
     public Integer getId() {
         return id;
@@ -51,5 +55,38 @@ public class Alarme implements Serializable{
 
     public void setDias(String dias) {
         this.dias = dias;
+    }
+
+
+    public Integer getDistancia() {
+        return distancia;
+    }
+
+    public void setDistancia(Integer distancia) {
+        this.distancia = distancia;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 }

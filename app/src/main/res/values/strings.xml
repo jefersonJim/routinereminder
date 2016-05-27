@@ -7,4 +7,17 @@
     <string name="action_desativar">Desativar</string>
     <string name="list_vazia">Nenhum registro encontrado</string>
     <string name="action_sobre">Sobre</string>
+     <string name="place_details">
+    <![CDATA[
+        <b>%1$s</b>
+        <br/>
+        <i>Lugar Id: %2$s</i>
+        <br/>
+        Endereço: %3$s
+        <br/>
+        Telefone: %4$s
+        <br/>
+        Website: %5$s
+    ]]>
+    </string>
 </resources>

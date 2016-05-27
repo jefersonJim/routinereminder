@@ -1,8 +1,11 @@
 package br.com.jry.routinereminder.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +26,7 @@ import br.com.jry.routinereminder.R;
 import br.com.jry.routinereminder.adapter.AlarmeAdapter;
 import br.com.jry.routinereminder.dao.AlarmeDao;
 import br.com.jry.routinereminder.entity.Alarme;
+import br.com.jry.routinereminder.service.AlarmeService;
 
 public class MainActivity extends AppCompatActivity {
     private AlarmeAdapter adapter;
@@ -30,7 +34,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+        boolean isOn = manager.isProviderEnabled( LocationManager.GPS_PROVIDER);
+        if(!isOn){
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivityForResult(intent, 1);
+        }
+
+
     }
+
 
     @Override
     protected void onResume() {
@@ -61,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Intent intent = new Intent(getApplicationContext(), AlarmeService.class);
+        getApplicationContext().startService(intent);
     }
 
     @Override
@@ -105,9 +122,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }else if(id == R.id.action_sobre){
+        if(id == R.id.action_sobre){
             return true;
         }
 

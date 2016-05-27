@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.com.jry.routinereminder.entity.Alarme;
@@ -37,7 +39,9 @@ public class AlarmeDao extends SQLiteOpenHelper{
                      "   repetir INTEGER," + // -- 0(false), 1(true)
                      "   distancia INTEGER,   " +
                      "   medida TEXT,   " +
-                     "   dias TEXT " + //-- 1, 2,3,4,5,6,7 => D, S, T, Q, Q, S, S
+                     "   dias TEXT," +
+                     "   endereco TEXT," +
+                     "   criacao DATETIME" + //-- 1, 2,3,4,5,6,7 => D, S, T, Q, Q, S, S
                      ");";
         db.execSQL(sql);
     }
@@ -60,6 +64,12 @@ public class AlarmeDao extends SQLiteOpenHelper{
                 alarme.setId(cursor.getInt(0));
                 alarme.setDescricao(cursor.getString(1));
                 alarme.setMensagem(cursor.getString(2));
+                alarme.setAtivo(cursor.getInt(3));
+                alarme.setLatitude(cursor.getDouble(4));
+                alarme.setLongitude(cursor.getDouble(5));
+                alarme.setDistancia(cursor.getInt(7));
+                alarme.setEndereco(cursor.getString(10));
+
                 alarmes.add(alarme);
             }
         } catch (Exception sqle) {
@@ -74,6 +84,12 @@ public class AlarmeDao extends SQLiteOpenHelper{
         ContentValues contentValues = new ContentValues();
         contentValues.put("descricao", alarme.getDescricao());
         contentValues.put("mensagem", alarme.getMensagem());
+        contentValues.put("latitude",alarme.getLatitude());
+        contentValues.put("longitude",alarme.getLongitude());
+        contentValues.put("distancia", alarme.getDistancia());
+        contentValues.put("endereco",alarme.getEndereco());
+        String currentDateandTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        contentValues.put("criacao", currentDateandTime);
 
         if(alarme.getId() != null){
             return getWritableDatabase().update(TABELA, contentValues, "id = ?", new String[]{String.valueOf(alarme.getId())});

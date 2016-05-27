@@ -20,14 +20,103 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Mensagem"
-        android:id="@+id/tvMsg"
+        android:text="Endereço:"
+        android:id="@+id/tvLblEndereco"
         android:layout_below="@+id/tvTitulo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp"
+        android:textColor="#747070" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tvEndereco"
+        android:layout_alignTop="@+id/tvLblEndereco"
+        android:layout_toRightOf="@+id/tvLblEndereco"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textColor="#64FFDA"
-        android:height="50dp"
+        android:paddingLeft="5dp"
+        android:textColor="#747070" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Latitude:"
+        android:id="@+id/tvLblLat"
+        android:layout_above="@+id/tvLblLng"
+        android:layout_toRightOf="@+id/imageView2"
+        android:layout_toEndOf="@+id/imageView2"
+        android:textColor="#747070" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/tvLat"
+        android:layout_below="@+id/tvEndereco"
+        android:layout_toRightOf="@+id/tvLblLat"
+        android:layout_alignRight="@+id/tvEndereco"
+        android:layout_alignEnd="@+id/tvEndereco"
+        android:paddingLeft="5dp"
+        android:textColor="#747070" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Longitude:"
+        android:id="@+id/tvLblLng"
+        android:layout_alignTop="@+id/tvLng"
+        android:layout_toRightOf="@+id/imageView2"
+        android:layout_toEndOf="@+id/imageView2"
+        android:textColor="#747070" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/tvLng"
+        android:layout_below="@+id/tvLat"
+        android:layout_toRightOf="@+id/tvLblLng"
+        android:layout_alignRight="@+id/tvLat"
+        android:layout_alignEnd="@+id/tvLat"
+        android:paddingLeft="5dp"
+        android:textColor="#747070" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@drawable/ic_marker"
+        android:layout_alignBottom="@+id/tvLblLng"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Distancia:"
+        android:id="@+id/tvLblDistancia"
+        android:layout_below="@+id/tvLblLng"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#747070" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tvDistancia"
+        android:layout_below="@+id/tvLblLng"
+        android:layout_alignLeft="@+id/tvEndereco"
+        android:layout_alignStart="@+id/tvEndereco"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:paddingLeft="5dp"
+        android:textColor="#747070" />
 
 </RelativeLayout>

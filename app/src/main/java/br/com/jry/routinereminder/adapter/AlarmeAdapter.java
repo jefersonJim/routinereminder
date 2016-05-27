@@ -31,12 +31,19 @@ public class AlarmeAdapter extends BaseAdapter {
         convertView = inflater.inflate(R.layout.list_alarme, null);
 
         TextView titulo = (TextView) convertView.findViewById(R.id.tvTitulo);
-        TextView mensagem = (TextView) convertView.findViewById(R.id.tvMsg);
+        TextView latitude = (TextView) convertView.findViewById(R.id.tvLat);
+        TextView longitude = (TextView) convertView.findViewById(R.id.tvLng);
+        TextView endereco = (TextView) convertView.findViewById(R.id.tvEndereco);
+        TextView distancia = (TextView) convertView.findViewById(R.id.tvDistancia);
+
 
         Alarme alarme = this.alarmes.get(position);
 
         titulo.setText(alarme.getDescricao());
-        mensagem.setText(alarme.getMensagem());
+        latitude.setText(alarme.getLatitude().toString());
+        longitude.setText(alarme.getLongitude().toString());
+        endereco.setText(alarme.getEndereco());
+        distancia.setText(alarme.getDistancia()+"m");
 
         return convertView;
     }

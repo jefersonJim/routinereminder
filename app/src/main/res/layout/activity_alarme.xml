@@ -18,7 +18,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Titulo"
         android:id="@+id/tvTituloAlarme"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="10dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -34,7 +34,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/tvTituloAlarme" />
+        android:layout_below="@+id/tvTituloAlarme"
+        android:inputType="textCapSentences"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -55,56 +56,127 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="10dp"
+        android:inputType="textCapSentences"/>
 
-    <Switch
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enviar SMS  "
-        android:id="@+id/switchSms"
-        android:layout_below="@+id/etMsgAlarme"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:checked="false" />
-
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Repetir  "
-        android:id="@+id/switchRepetir"
-        android:checked="false"
-        android:layout_alignTop="@+id/switchSms"
-        android:layout_toRightOf="@+id/switchSms"
-        android:layout_toEndOf="@+id/switchSms"
-        android:layout_marginLeft="49dp"
-        android:layout_marginStart="49dp" />
-
-    <fragment
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:id="@+id/map"
-        android:layout_below="@+id/switchSms"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="97dp"
+        android:text="Selecionar local"
+        android:id="@+id/btLocal"
+        android:drawableRight="@drawable/ic_next"
+        android:layout_alignTop="@+id/imageView"
         android:layout_alignRight="@+id/etMsgAlarme"
         android:layout_alignEnd="@+id/etMsgAlarme"
-        android:layout_alignParentBottom="true"
-        xmlns:map="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        tools:context="br.com.jry.routinereminder.activity.AlarmeActivity"/>
+        android:onClick="setLocal"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Local"
-        android:id="@+id/tvLocal"
-        android:layout_below="@+id/switchSms"
+        android:text="Endereço :"
+        android:id="@+id/tvLblEndereco"
+        android:layout_below="@+id/btLocal"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="66dp" />
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="5dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tvEndereco"
+        android:layout_below="@+id/btLocal"
+        android:layout_alignRight="@+id/etMsgAlarme"
+        android:layout_alignEnd="@+id/etMsgAlarme"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/tvMsgAlarme"
+        android:layout_toEndOf="@+id/tvMsgAlarme"
+        android:paddingLeft="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Latitude:"
+        android:id="@+id/tvLblLat"
+        android:layout_below="@+id/tvEndereco"
+        android:layout_alignLeft="@+id/tvLblEndereco"
+        android:layout_alignStart="@+id/tvLblEndereco" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/tvLat"
+        android:layout_below="@+id/tvEndereco"
+        android:layout_toRightOf="@+id/tvLblLat"
+        android:layout_alignRight="@+id/etMsgAlarme"
+        android:layout_alignEnd="@+id/etMsgAlarme"
+        android:paddingLeft="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Longitude:"
+        android:id="@+id/tvLblLng"
+        android:layout_below="@+id/tvLblLat"
+        android:layout_alignLeft="@+id/tvLblLat"
+        android:layout_alignStart="@+id/tvLblLat" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/tvLng"
+        android:layout_below="@+id/tvLat"
+        android:layout_toRightOf="@+id/tvLblLng"
+        android:layout_alignRight="@+id/etMsgAlarme"
+        android:layout_alignEnd="@+id/etMsgAlarme"
+        android:paddingLeft="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Distancia:"
+        android:id="@+id/tvLblDistancia"
+        android:layout_below="@+id/tvLblLng"
+        android:layout_alignLeft="@+id/tvLblEndereco"
+        android:layout_alignStart="@+id/tvLblEndereco"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tvDistancia"
+        android:layout_below="@+id/tvLblLng"
+        android:layout_marginTop="5dp"
+        android:layout_alignRight="@+id/tvLng"
+        android:layout_alignEnd="@+id/tvLng"
+        android:layout_alignBottom="@+id/tvLblDistancia"
+        android:layout_toRightOf="@+id/tvLblDistancia"
+        android:layout_toEndOf="@+id/tvLblDistancia"
+        android:paddingLeft="5dp" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="53dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/ic_marker"
+        android:layout_below="@+id/etMsgAlarme"
+        android:layout_alignLeft="@+id/tvLblEndereco"
+        android:layout_alignStart="@+id/tvLblEndereco"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
+        android:paddingLeft="0dp"
+        android:padding="0dp"
+        android:paddingBottom="0dp"
+        android:layout_toLeftOf="@+id/tvLng"
+        android:layout_toStartOf="@+id/tvLng" />
 
 </RelativeLayout>
