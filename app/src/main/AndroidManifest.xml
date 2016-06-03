@@ -46,11 +46,14 @@
             android:name=".service.AlarmeService"
             android:enabled="true"
             android:exported="false">
-                <intent-filter>
-                    <category android:name="android.intent.category.DEFAULT"/>
-                    <action android:name="AlarmeService"/>
-                </intent-filter>
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="AlarmeService" />
+            </intent-filter>
         </service>
+
+        <activity android:name=".activity.LocaisVisitadosActivity"></activity>
     </application>
 
 </manifest>

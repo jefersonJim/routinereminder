@@ -64,12 +64,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Selecionar local"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp"
         android:id="@+id/btLocal"
-        android:drawableRight="@drawable/ic_next"
+        android:drawableRight="@drawable/ic_next_white"
         android:layout_alignTop="@+id/imageView"
         android:layout_alignRight="@+id/etMsgAlarme"
         android:layout_alignEnd="@+id/etMsgAlarme"
-        android:onClick="setLocal"/>
+        android:onClick="setLocal"
+        android:background="@drawable/ic_btnshape"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -178,5 +181,26 @@
         android:paddingBottom="0dp"
         android:layout_toLeftOf="@+id/tvLng"
         android:layout_toStartOf="@+id/tvLng" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Contato:"
+        android:id="@+id/tvContatos"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/tvLblDistancia"
+        android:layout_alignLeft="@+id/tvLblDistancia"
+        android:layout_alignStart="@+id/tvLblDistancia" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="10"
+        android:id="@+id/etContatos"
+        android:layout_below="@+id/tvContatos"
+        android:layout_alignLeft="@+id/tvContatos"
+        android:layout_alignStart="@+id/tvContatos" />
 
 </RelativeLayout>

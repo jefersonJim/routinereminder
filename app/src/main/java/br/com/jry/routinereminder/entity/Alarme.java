@@ -16,6 +16,8 @@ public class Alarme implements Serializable{
     private Double longitude;
     private Integer distancia;
     private String endereco;
+    private Integer visitado;
+    private String contatos;
 
     public Integer getId() {
         return id;
@@ -88,5 +90,21 @@ public class Alarme implements Serializable{
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    public Integer getVisitado() {
+        return visitado;
+    }
+
+    public void setVisitado(Integer visitado) {
+        this.visitado = visitado;
+    }
+
+    public String getContatos() {
+        return contatos;
+    }
+
+    public void setContatos(String contatos) {
+        this.contatos = contatos;
     }
 }

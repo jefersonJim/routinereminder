@@ -5,8 +5,10 @@
     <string name="action_edit">Editar</string>
     <string name="action_delete">Deletar</string>
     <string name="action_desativar">Desativar</string>
-    <string name="list_vazia">Nenhum registro encontrado</string>
+    <string name="list_vazia">Nenhum alarme ativo encontrado</string>
+    <string name="list_vazia_locais">Nenhum local encontrado</string>
     <string name="action_sobre">Sobre</string>
+    <string name="action_locais">Locais visitados</string>
      <string name="place_details">
     <![CDATA[
         <b>%1$s</b>

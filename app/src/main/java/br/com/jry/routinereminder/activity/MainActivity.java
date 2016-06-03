@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(intent, 1);
         }
 
-
     }
 
 
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         AlarmeDao alarmeDao = new AlarmeDao(getApplicationContext());
-        this.alarmes = alarmeDao.getListAlarmes();
+        this.alarmes = alarmeDao.getListAlarmesAtivos();
 
         setContentView(R.layout.activity_main);
         ListView listView = (ListView) findViewById(R.id.listAlarmeView);
@@ -122,6 +121,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
+        if(id == R.id.action_locais){
+            Intent intent = new Intent(getApplicationContext(), LocaisVisitadosActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
         if(id == R.id.action_sobre){
             return true;
         }

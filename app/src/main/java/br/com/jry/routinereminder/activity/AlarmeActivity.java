@@ -42,15 +42,20 @@ public class AlarmeActivity extends  AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarme);
 
+        setTitle("Routine Reminder - Cadastro");
 
         Alarme alarme = (Alarme) getIntent().getSerializableExtra("alarme");
         if(alarme!= null){
+            setTitle("Routine Reminder - Editar");
             this.id = alarme.getId();
             EditText titulo = (EditText) findViewById(R.id.etTituloAlarme);
             EditText msg = (EditText) findViewById(R.id.etMsgAlarme);
+            EditText contato = (EditText) findViewById(R.id.etContatos);
 
             titulo.setText(alarme.getDescricao());
             msg.setText(alarme.getMensagem());
+            contato.setText(alarme.getContatos());
+
             endereco = alarme.getEndereco();
             latitude = alarme.getLatitude();
             longitude = alarme.getLongitude();
@@ -76,6 +81,7 @@ public class AlarmeActivity extends  AppCompatActivity  {
             case R.id.action_saveAlarm :
                 EditText titulo = (EditText) findViewById(R.id.etTituloAlarme);
                 EditText msg = (EditText) findViewById(R.id.etMsgAlarme);
+                EditText contato = (EditText) findViewById(R.id.etContatos);
 
                 if(msg.getText().toString().trim().equals("") || titulo.getText().toString().trim().equals("")
                         && latitude == null && longitude == null){
@@ -87,6 +93,7 @@ public class AlarmeActivity extends  AppCompatActivity  {
                     alarme.setId(this.id);
                     alarme.setDescricao(titulo.getText().toString());
                     alarme.setMensagem(msg.getText().toString());
+                    alarme.setContatos(contato.getText().toString());
                     alarme.setLatitude(latitude);
                     alarme.setLongitude(longitude);
                     alarme.setDistancia(distancia);
@@ -128,7 +135,9 @@ public class AlarmeActivity extends  AppCompatActivity  {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        setInfoLocal();
+        if(latitude != null){
+            setInfoLocal();
+        }
     }
 
     public void setLocal(View view){

@@ -73,6 +73,8 @@ public class MapsActivity extends AppCompatActivity implements PlaceSelectionLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+        setTitle("Routine Reminder - Selecionar Local");
+
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.autocomplete_fragment);
         autocompleteFragment.setOnPlaceSelectedListener(this);
 
@@ -189,7 +191,7 @@ public class MapsActivity extends AppCompatActivity implements PlaceSelectionLis
             circle = map.addCircle(new CircleOptions()
                     .center(markerOptions.getPosition())
                     .radius(areaSeekBar.getProgress() + 100)
-                    .strokeColor(Color.BLUE));
+                    .strokeColor(Color.parseColor("#45d3b0")));
 
             TextView tvDistancia = (TextView) findViewById(R.id.tvDistancia);
             tvDistancia.setText(areaSeekBar.getProgress() + 100 + "m");
@@ -241,7 +243,7 @@ public class MapsActivity extends AppCompatActivity implements PlaceSelectionLis
         circle = map.addCircle(new CircleOptions()
                 .center(localMap)
                 .radius(100)
-                .strokeColor(Color.BLUE));
+                .strokeColor(Color.parseColor("#45d3b0")));
 
         areaSeekBar.setProgress(0);
     }
@@ -259,14 +261,14 @@ public class MapsActivity extends AppCompatActivity implements PlaceSelectionLis
         markerOptions = new MarkerOptions().position(localMap).title(endereco);
         map.addMarker(markerOptions).showInfoWindow();
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(localMap, 15);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(localMap, 21);
         map.moveCamera(cameraUpdate);
         map.animateCamera(cameraUpdate);
 
         circle = map.addCircle(new CircleOptions()
                 .center(localMap)
                 .radius(distancia)
-                .strokeColor(Color.BLUE));
+                .strokeColor(Color.parseColor("#45d3b0")));
 
         areaSeekBar.setProgress(distancia-100);
 

@@ -29,19 +29,21 @@ public class AlarmeDao extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE  "+TABELA+" ( " +
-                     "   id INTEGER PRIMARY KEY,   " +
-                     "   descricao TEXT,   " +
-                     "   mensagem TEXT,   " +
-                     "   ativo INTEGER, " + //-- 0(false), 1(true)
-                     "   latitude NUMERIC,   " +
-                     "   longitude NUMERIC,   " +
-                     "   repetir INTEGER," + // -- 0(false), 1(true)
-                     "   distancia INTEGER,   " +
-                     "   medida TEXT,   " +
-                     "   dias TEXT," +
-                     "   endereco TEXT," +
-                     "   criacao DATETIME" + //-- 1, 2,3,4,5,6,7 => D, S, T, Q, Q, S, S
+        String sql = "CREATE TABLE  "+TABELA+" (    " +
+                     "    id INTEGER PRIMARY KEY,   " +
+                     "    descricao TEXT,           " +
+                     "    mensagem TEXT,            " +
+                     "    ativo INTEGER,            " + //-- 0(false), 1(true)
+                     "    latitude NUMERIC,         " +
+                     "    longitude NUMERIC,        " +
+                     "    repetir INTEGER,          " + // -- 0(false), 1(true)
+                     "    distancia INTEGER,        " +
+                     "    medida TEXT,              " +
+                     "    dias TEXT,                " +
+                     "    endereco TEXT,            " +
+                     "    criacao DATETIME,         " +
+                     "    visitado INTEGER,         " + // -- 0(false), 1(true)
+                     "    contatos TEXT             " + // -- separados por "," (Vírgula)
                      ");";
         db.execSQL(sql);
     }
@@ -69,7 +71,65 @@ public class AlarmeDao extends SQLiteOpenHelper{
                 alarme.setLongitude(cursor.getDouble(5));
                 alarme.setDistancia(cursor.getInt(7));
                 alarme.setEndereco(cursor.getString(10));
+                alarme.setVisitado(cursor.getInt(12));
+                alarme.setContatos(cursor.getString(13));
+                alarmes.add(alarme);
+            }
+        } catch (Exception sqle) {
+            Log.e("Erro", sqle.getMessage());
+        } finally {
+            cursor.close();
+        }
+        return alarmes;
+    }
 
+
+    public List<Alarme> getListAlarmesAtivos(){
+        List<Alarme> alarmes = new ArrayList<>();
+        String sql = "select * from " + TABELA + " where ativo = 1 order by id";
+        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+
+        try {
+            while (cursor.moveToNext()) {
+                Alarme alarme = new Alarme();
+                alarme.setId(cursor.getInt(0));
+                alarme.setDescricao(cursor.getString(1));
+                alarme.setMensagem(cursor.getString(2));
+                alarme.setAtivo(cursor.getInt(3));
+                alarme.setLatitude(cursor.getDouble(4));
+                alarme.setLongitude(cursor.getDouble(5));
+                alarme.setDistancia(cursor.getInt(7));
+                alarme.setEndereco(cursor.getString(10));
+                alarme.setVisitado(cursor.getInt(12));
+                alarme.setContatos(cursor.getString(13));
+                alarmes.add(alarme);
+            }
+        } catch (Exception sqle) {
+            Log.e("Erro", sqle.getMessage());
+        } finally {
+            cursor.close();
+        }
+        return alarmes;
+    }
+
+    public List<Alarme> getListAlarmesVisitados(){
+        List<Alarme> alarmes = new ArrayList<>();
+        String sql = "select * from " + TABELA + " where visitado = 1 order by id";
+        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+
+        try {
+            while (cursor.moveToNext()) {
+                Alarme alarme = new Alarme();
+                alarme.setId(cursor.getInt(0));
+                alarme.setDescricao(cursor.getString(1));
+                alarme.setMensagem(cursor.getString(2));
+                alarme.setAtivo(cursor.getInt(3));
+                alarme.setLatitude(cursor.getDouble(4));
+                alarme.setLongitude(cursor.getDouble(5));
+                alarme.setDistancia(cursor.getInt(7));
+                alarme.setEndereco(cursor.getString(10));
+                alarme.setVisitado(cursor.getInt(12));
+                alarme.setContatos(cursor.getString(13));
                 alarmes.add(alarme);
             }
         } catch (Exception sqle) {
@@ -88,13 +148,32 @@ public class AlarmeDao extends SQLiteOpenHelper{
         contentValues.put("longitude",alarme.getLongitude());
         contentValues.put("distancia", alarme.getDistancia());
         contentValues.put("endereco",alarme.getEndereco());
+        contentValues.put("contatos",alarme.getContatos());
+        contentValues.put("ativo",1);
+        contentValues.put("repetir",0);
+        contentValues.put("medida","m");
         String currentDateandTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         contentValues.put("criacao", currentDateandTime);
 
         if(alarme.getId() != null){
             return getWritableDatabase().update(TABELA, contentValues, "id = ?", new String[]{String.valueOf(alarme.getId())});
+        }else{
+            contentValues.put("visitado",0);
         }
         return  getWritableDatabase().insert(TABELA, null, contentValues);
+    }
+
+    public long desativarAlarmeVisitado(Alarme alarme){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("ativo",0);
+        contentValues.put("visitado",1);
+        return getWritableDatabase().update(TABELA, contentValues, "id = ?", new String[]{String.valueOf(alarme.getId())});
+    }
+
+    public long desativarAlarme(Alarme alarme){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("ativo",0);
+        return getWritableDatabase().update(TABELA, contentValues, "id = ?", new String[]{String.valueOf(alarme.getId())});
     }
 
     public int delete(int id){
